@@ -1,20 +1,20 @@
-# Use the official .NET SDK image for building
+# Build Stage
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
 
-# Copy csproj and restore as distinct layers
+# Copy csproj and restore
 COPY *.csproj ./
 RUN dotnet restore
 
-# Copy the remaining source code
+# Copy all files and publish
 COPY . ./
 RUN dotnet publish -c Release -o out
 
-# Build runtime image
+# Runtime Stage
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
-COPY --from=build /app/out .
+COPY --from=build /app/out ./
 
-# Expose port 80
 EXPOSE 80
-ENTRYPOINT ["dotnet", "DollarBirdApp.dll"]
+
+ENTRYPOINT ["dotnet", "backend.dll"]

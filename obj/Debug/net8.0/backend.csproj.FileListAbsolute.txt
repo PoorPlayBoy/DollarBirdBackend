@@ -96,3 +96,4 @@ C:\Users\Nthando\OneDrive\Documents\First Program\DollarBirdApp\backend\obj\Debu
 C:\Users\Nthando\OneDrive\Documents\First Program\DollarBirdApp\backend\obj\Debug\net8.0\backend.pdb
 C:\Users\Nthando\OneDrive\Documents\First Program\DollarBirdApp\backend\obj\Debug\net8.0\backend.genruntimeconfig.cache
 C:\Users\Nthando\OneDrive\Documents\First Program\DollarBirdApp\backend\obj\Debug\net8.0\ref\backend.dll
+C:\Users\Nthando\OneDrive\Documents\First Program\DollarBirdApp\backend\obj\Debug\net8.0\backend.sourcelink.json

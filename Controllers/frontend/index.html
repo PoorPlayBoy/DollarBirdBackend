@@ -1,31 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>DollarBird Products</title>
+  <meta charset="UTF-8" />
+  <title>DollarBird Products</title>
 </head>
 <body>
-    <h1>Available Products</h1>
-    <ul id="product-list"></ul>
+  <h1>Available Products</h1>
+  <ul id="product-list"></ul>
 
-    <script>
-        fetch('http://localhost:5181/api/products')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                const list = document.getElementById('product-list');
-                console.log('Products:', data);
-                data.forEach(product => {
-                    const item = document.createElement('li');
-                    item.textContent = product.title || product.name || 'Unnamed Product';
-                    list.appendChild(item);
-                });
-            })
-            .catch(error => console.error('Failed to load products:', error));
-    </script>
+  <script>
+    fetch('http://localhost:5181/api/products')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        if (!Array.isArray(data)) {
+          throw new Error('Expected an array of products');
+        }
+        const list = document.getElementById('product-list');
+        data.forEach(product => {
+          const item = document.createElement('li');
+          item.textContent = product.title || product.name || 'Unnamed Product';
+          list.appendChild(item);
+        });
+      })
+      .catch(error => console.error('Error loading products:', error));
+  </script>
 </body>
 </html>
