@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DollarBird</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+  <h2>Login</h2>
+  <input type="email" id="email" placeholder="Email" />
+  <input type="password" id="password" placeholder="Password" />
+  <button onclick="login()">Login</button>
+
+  <h2>Sign Up</h2>
+  <input type="email" id="signup-email" placeholder="Email" />
+  <input type="password" id="signup-password" placeholder="Password" />
+  <button onclick="signUp()">Sign Up</button>
+
+  <!-- AI Marketplace -->
+  <div id="marketplace" style="display: none;"></div>
+
+  <!-- ✅ Embedded LibreChat -->
+  <iframe 
+    src="https://your-librechat-instance.com" 
+    width="350" 
+    height="600" 
+    style="position: fixed; bottom: 10px; right: 10px; border: none; z-index: 9999;">
+  </iframe>
+
+  <script>
+    // ✅ Initialize Supabase client
+    const supabase = window.supabase.createClient(
+      'https://umwanszwktsfdvvzcavq.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVtd2Fuc3p3a3RzZmR2dnpjYXZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDkyNzY4NDIsImV4cCI6MjA2NDg1Mjg0Mn0.7PsFWe6j9FwYhJ4sSnPvhMMNHWAFsyOEa07LavKG4xg'
+    );
+
+    async function login() {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+      if (error) {
+        alert('Login failed: ' + error.message);
+        document.getElementById('marketplace').style.display = 'none';
+        return;
+      }
+
+      alert('Welcome back!');
+      document.getElementById('marketplace').style.display = 'block';
+      await loadSolutions(); // load only after login
+      updateCurrency();      // run after products are loaded
+    }
+
+    async function signUp() {
+      const email = document.getElementById('signup-email').value;
+      const password = document.getElementById('signup-password').value;
+
+      const { data, error } = await supabase.auth.signUp({ email, password });
+      if (error) alert("Signup failed: " + error.message);
+      else alert("Signup success! Check your email to confirm.");
+    }
+
+    async function loadSolutions() {
+      try {
+        const res = await fetch('https://dollarbirdbackend.onrender.com/api/products');
+        const products = await res.json();
+        const market = document.getElementById('marketplace');
+        market.innerHTML = "";
+
+        products.forEach(p => {
+          const card = document.createElement("div");
+          card.innerHTML = `
+            <h3>${p.title}</h3>
+            <p>${p.description}</p>
+            <span class="price" data-price="${p.price}">R ${p.price}</span><br/>
+            <button onclick="buyNow(${p.productId})">Buy Now</button>
+          `;
+          market.appendChild(card);
+        });
+      } catch (err) {
+        alert("Failed to load products: " + err.message);
+      }
+    }
+
+    function buyNow(productId) {
+      supabase.auth.getSession().then(({ data: { session } }) => {
+        if (!session) return alert('Login first!');
+        fetch('https://dollarbirdbackend.onrender.com/api/orders', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ productId })
+        })
+        .then(res => res.json())
+        .then(data => alert('Order placed!'))
+        .catch(err => alert('Error placing order: ' + err.message));
+      });
+    }
+
+    // ✅ Only update prices after marketplace loads
+    async function updateCurrency() {
+      try {
+        const res = await fetch('https://ipapi.co/json/');
+        const loc = await res.json();
+        let symbol = 'R';
+        if (loc.country_name === 'United States') symbol = '$';
+        else if (loc.country_name === 'United Kingdom') symbol = '£';
+
+        document.querySelectorAll('.price').forEach(el => {
+          const price = parseFloat(el.getAttribute('data-price'));
+          el.innerText = `${symbol}${price}`;
+        });
+      } catch (err) {
+        console.warn('Currency conversion failed:', err);
+      }
+    }
+  </script>
+</body>
+</html>
