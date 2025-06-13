@@ -1,0 +1,27 @@
+{
+  "version": "2.4.1",
+  "summary": {
+    "title": "Initial Threat Model ",
+    "owner": "PoorPlayBoy ",
+    "description": "This threat model analyzes the StellarPay Digital Banking web platform, which facilitates user registration, money transfers, account management, and real-time financial services. The model focuses on securing data flows, APIs, and user authentication using the STRIDE framework.\n",
+    "id": 0
+  },
+  "detail": {
+    "contributors": [],
+    "diagrams": [
+      {
+        "id": 0,
+        "title": "StellarPay Platform Diagram",
+        "diagramType": "STRIDE",
+        "placeholder": "New STRIDE diagram description",
+        "thumbnail": "./public/content/images/thumbnail.stride.jpg",
+        "version": "2.4.1",
+        "cells": [],
+        "description": "Users (external entity)  Web App (process)  Database (data store)  API Gateway (process)  Payment Gateway (external entity)  Data flows between them  Trust boundaries to separate external and internal systems"
+      }
+    ],
+    "diagramTop": 1,
+    "reviewer": "",
+    "threatTop": 0
+  }
+}
