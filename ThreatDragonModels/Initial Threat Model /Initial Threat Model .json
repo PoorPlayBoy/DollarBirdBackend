@@ -26,7 +26,8 @@
         "placeholder": "New STRIDE diagram description",
         "thumbnail": "./public/content/images/thumbnail.stride.jpg",
         "version": "2.4.1",
-        "cells": []
+        "cells": [],
+        "description": "User  Label: Customer  Description: End user using web/mobile app , Bank/Payment Gateway  Label: Payment Gateway  Description: External processor for card/bank payments, Web Application  Label: StellarPay Web App  Description: Front-end user interface  Authentication Service  Label: Auth API  Description: Handles user login and token validation  Transaction Processor  Label: Transaction API  Description: Processes financial operations, User Database  Label: User DB  Description: Stores user credentials and profiles  Transaction Logs  Label: Transaction DB  Description: Logs and records all transactions"
       }
     ],
     "diagramTop": 2,
