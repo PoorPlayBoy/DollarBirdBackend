@@ -20,17 +20,17 @@
         "description": "Users (external entity)  Web App (process)  Database (data store)  API Gateway (process)  Payment Gateway (external entity)  Data flows between them  Trust boundaries to separate external and internal systems"
       },
       {
-        "id": 1,
+        "id": 3,
         "title": "StellarPay Web App Architecture",
         "diagramType": "STRIDE",
         "placeholder": "New STRIDE diagram description",
         "thumbnail": "./public/content/images/thumbnail.stride.jpg",
         "version": "2.4.1",
         "cells": [],
-        "description": "User  Label: Customer  Description: End user using web/mobile app , Bank/Payment Gateway  Label: Payment Gateway  Description: External processor for card/bank payments, Web Application  Label: StellarPay Web App  Description: Front-end user interface  Authentication Service  Label: Auth API  Description: Handles user login and token validation  Transaction Processor  Label: Transaction API  Description: Processes financial operations, User Database  Label: User DB  Description: Stores user credentials and profiles  Transaction Logs  Label: Transaction DB  Description: Logs and records all transactions"
+        "description": "Customer → StellarPay Web App Label: Login / Payment Request  StellarPay Web App → Auth API Label: Authentication Request  Auth API → User DB Label: Credential Validation  StellarPay Web App → Transaction API Label: Payment Instructions  Transaction API → Transaction DB Label: Log Transaction  Transaction API → Payment Gateway Label: Payment Request  Payment Gateway → Transaction API Label: Payment Status"
       }
     ],
-    "diagramTop": 2,
+    "diagramTop": 4,
     "reviewer": "",
     "threatTop": 0
   }
