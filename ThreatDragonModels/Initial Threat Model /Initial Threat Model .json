@@ -27,7 +27,7 @@
         "thumbnail": "./public/content/images/thumbnail.stride.jpg",
         "version": "2.4.1",
         "cells": [],
-        "description": "Customer → StellarPay Web App Label: Login / Payment Request  StellarPay Web App → Auth API Label: Authentication Request  Auth API → User DB Label: Credential Validation  StellarPay Web App → Transaction API Label: Payment Instructions  Transaction API → Transaction DB Label: Log Transaction  Transaction API → Payment Gateway Label: Payment Request  Payment Gateway → Transaction API Label: Payment Status"
+        "description": " Internal Zone: Web App  Auth API  Transaction API  User DB  Transaction DB  Label: Internal Trusted Network  🔵 External Zone: Customer  Payment Gateway  Label: External Zone Customer → StellarPay Web App Label: Login / Payment Request  StellarPay Web App → Auth API Label: Authentication Request  Auth API → User DB Label: Credential Validation  StellarPay Web App → Transaction API Label: Payment Instructions  Transaction API → Transaction DB Label: Log Transaction  Transaction API → Payment Gateway Label: Payment Request  Payment Gateway → Transaction API Label: Payment Status"
       }
     ],
     "diagramTop": 4,
